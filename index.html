@@ -22,7 +22,7 @@
     </header>
     <!-- This section should be hidden by default and shown when there are todos -->
     <section class="main">
-      <input class="toggle-all" type="checkbox">
+      <input class="toggle-all" type="checkbox" ng-click="checkAll()" ng-model="isCheckAll">
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
         <!-- These are here just to show the structure of the list items -->
@@ -31,14 +31,16 @@
         <!-- 如果当前任务是完成的，那么就添加 completed 类；
              根据 todo.isCompleted 这个值来确定是否添加，这个值为true就添加，否则不添加
          -->
-        <li ng-repeat="todo in todoList track by $index" ng-class="{ completed: todo.isCompleted }">
+        <li ng-repeat="todo in todoList track by $index" ng-class="{ completed: todo.isCompleted, editing: todo.id === editingId }">
           <div class="view">
             <input class="toggle" type="checkbox" ng-model="todo.isCompleted">
-            <label ng-bind="todo.name"></label>
+            <label ng-bind="todo.name" ng-dblclick="edit(todo.id)"></label>
             <!-- 在ng-click指定的函数中，直接将 id 作为参数传给del方法即可！ -->
             <button class="destroy" ng-click="del(todo.id)"></button>
           </div>
-          <input class="edit" value="Create a TodoMVC template">
+          <form ng-submit="update()">
+            <input class="edit" ng-model="todo.name">
+          </form>
         </li>
 
       </ul>

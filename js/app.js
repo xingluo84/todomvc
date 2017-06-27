@@ -62,7 +62,38 @@
 			}
 		};
 
-		
+		// 4 修改任务
+		// 
+		// editingId 用来保存当前编辑项的id，默认值为：-1，这样，所有数据的id
+		// 与默认值都不相同，即：页面渲染的时候，都是非编辑状态
+		vm.editingId = -1;
+		// edit() 方法，让当前元素出现编辑状态
+		vm.edit = function( id ) {
+			// 目的：双击哪个元素，就给这个元素所属的li元素添加 editing 类
+			// 思路：将当前点击元素的id，赋值为 editingId。赋值以后，ng-class中的
+			// 		editing: todo.id === editingId 成立，那么，就会给当前元素添加一个 editing 类
+			vm.editingId = id;
+		};
+		// 更新保存数据
+		// 因为数据是 双向绑定 的，所以，不用处理数据
+		// 只需要让当前项，变为只读状态即可！（也就是：移除 editing）
+		// 也就是：editing: todo.id === editingId 不成立
+		vm.update = function() {
+			vm.editingId = -1;
+		};
+
+		// 5 切换任务选中状态(单个或批量)
+		//	5.1 单个任务状态的切换，直接通过 ng-model 的双向绑定，就已经实现了
+		// 	5.2 批量修改任务状态，根据按钮的自身的选中状态，来控制所有其他任务状态
+		// 		  a. 获取到当前全选按钮的选中状态（ng-model）
+		// 			b. 遍历数据源，将所有任务的状态修改为与当前全选按钮的状态
+		vm.isCheckAll = false;
+		vm.checkAll = function() {
+			todoList.forEach(function(todo) {
+				todo.isCompleted = vm.isCheckAll;
+			});
+		};
+
 	}
 
 })(angular);
