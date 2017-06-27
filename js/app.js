@@ -50,6 +50,19 @@
 			// 清空文本框（清空 taskName 属性的值）
 			vm.taskName = '';
 		};
+
+		// 3 删除一条任务
+		vm.del = function(id) {
+			// 思路：只需要将当前id对应的数据，从数组中移除就可以了！
+			for(var i = 0; i < todoList.length; i++) {
+				if(todoList[i].id === id) {
+					todoList.splice(i, 1);
+					break;
+				}
+			}
+		};
+
+		
 	}
 
 })(angular);

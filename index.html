@@ -35,7 +35,8 @@
           <div class="view">
             <input class="toggle" type="checkbox" ng-model="todo.isCompleted">
             <label ng-bind="todo.name"></label>
-            <button class="destroy"></button>
+            <!-- 在ng-click指定的函数中，直接将 id 作为参数传给del方法即可！ -->
+            <button class="destroy" ng-click="del(todo.id)"></button>
           </div>
           <input class="edit" value="Create a TodoMVC template">
         </li>
