@@ -94,6 +94,20 @@
 			});
 		};
 
+		// 6 清除已完成任务
+		vm.clearCompleted = function() {
+			// 思路：遍历数据源，将已完成的任务删除（从数组中删除元素有个坑）
+			// 			直接将未完成的任务保存起来
+			var tempArr = [];
+			for(var i = 0; i < todoList.length; i++) {
+				var todo = todoList[i];
+				if( !todo.isCompleted ) {
+					tempArr.push( todo );
+				}
+			}
+			
+			vm.todoList = tempArr;
+		};
 	}
 
 })(angular);
