@@ -13,7 +13,12 @@
   <section class="todoapp">
     <header class="header">
       <h1>todos</h1>
-      <input class="new-todo" placeholder="What needs to be done?" autofocus>
+
+      <!-- 在form表单中按回车键，会触发form表单的 submit 事件！！！ -->
+      <form ng-submit="add()">
+        <!-- 给文本框绑定 taskName  -->
+        <input class="new-todo" ng-model="taskName" placeholder="What needs to be done?" autofocus>
+      </form>
     </header>
     <!-- This section should be hidden by default and shown when there are todos -->
     <section class="main">
@@ -34,6 +39,7 @@
           </div>
           <input class="edit" value="Create a TodoMVC template">
         </li>
+
       </ul>
     </section>
     <!-- This footer should hidden by default and shown when there are todos -->
